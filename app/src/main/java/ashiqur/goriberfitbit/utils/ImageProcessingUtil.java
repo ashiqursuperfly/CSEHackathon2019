@@ -1,11 +1,6 @@
-package ashiqur.goriberfitbit.ui;
+package ashiqur.goriberfitbit.utils;
 
-/**
- * This abstract class is used to process images.
- * 
- * @author Justin Wetherell <phishman3579@gmail.com>
- */
-public abstract class ImageProcessingUtils {
+public abstract class ImageProcessingUtil {
 
     private static int decodeYUV420SPtoRedSum(byte[] yuv420sp, int width, int height) {
         if (yuv420sp == null) return 0;
@@ -45,7 +40,7 @@ public abstract class ImageProcessingUtils {
     /**
      * Given a byte array representing a yuv420sp image, determine the average
      * amount of red in the image. Note: returns 0 if the byte array is NULL.
-     * 
+     *
      * @param yuv420sp
      *            Byte array representing a yuv420sp image
      * @param width

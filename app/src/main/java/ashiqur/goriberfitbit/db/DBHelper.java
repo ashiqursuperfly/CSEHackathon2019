@@ -88,7 +88,6 @@ public class DBHelper extends SQLiteOpenHelper {
 //        for (long tag_id : tag_ids) {
 //            createTodoTag(todo_id, tag_id);
 //        }
-
         return todo_id;
     }
     public List<SessionData> getAllSessions() {

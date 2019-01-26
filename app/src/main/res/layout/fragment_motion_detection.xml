@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="50dp"
+    android:padding="30dp"
     tools:context=".ui.MotionDetectionFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -18,17 +18,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Acceleration :" />
+            android:text="Acceleration:"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv_accelerometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -36,20 +39,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Distance Walked" />
-    <TextView
-        android:id="@+id/tv_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_marginEnd="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start/nEnd"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distance:"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start/nEnd"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     <Switch
         android:id="@+id/switch_calc_distance"
         android:layout_width="wrap_content"

@@ -24,7 +24,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -311,7 +315,6 @@ public class MotionDetectionFragment extends Fragment {
 
     private void getLastLocationNewMethod() {
         FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             getLocationPermission();
@@ -357,7 +360,6 @@ public class MotionDetectionFragment extends Fragment {
                     COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionsGranted = true;
                 Log.wtf(TAG, "Permission : permission already granted before");
-                // switchFragment(R.id.navdrawer_browserides);
             } else {
                 ActivityCompat.requestPermissions((Activity) context,
                         permissions,
@@ -369,6 +371,7 @@ public class MotionDetectionFragment extends Fragment {
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
+//
 
     private double meterDistanceBetweenPoints(double lat_a, double lng_a, double lat_b, double lng_b) {
         float pk = (float) (180.f / Math.PI);

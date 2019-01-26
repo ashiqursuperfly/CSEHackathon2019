@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                ft = getSupportFragmentManager().beginTransaction();
 //                ft.replace(R.id.framelayout_content_main_activity, fragment,getSupportFragmentManager().getBackStackEntryCount()+"");
 //                ft.commit();
-                Intent i = new Intent(MainActivity.this, HeartRateMonitor.class);
+                Intent i = new Intent(MainActivity.this, HeartRateActivity.class);
                 startActivity(i);
 
                 //Toast.makeText(getApplicationContext(),"Premens",Toast.LENGTH_SHORT).show();

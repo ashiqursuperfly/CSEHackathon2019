@@ -4,7 +4,7 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	tools:context=".ui.HeartRateMonitor"
+	tools:context=".ui.HeartRateActivity"
 	android:id="@+id/layout">
 	<LinearLayout android:id="@+id/top"
         android:paddingLeft="10dp"

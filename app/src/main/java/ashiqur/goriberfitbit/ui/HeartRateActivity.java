@@ -28,11 +28,10 @@ import org.json.JSONObject;
 
 import ashiqur.goriberfitbit.R;
 import ashiqur.goriberfitbit.db.db_models.HeartRateData;
-import ashiqur.goriberfitbit.db.db_models.SessionData;
 import ashiqur.goriberfitbit.rest_api.ApiClient;
 import ashiqur.goriberfitbit.rest_api.api_models.CustomResponse;
-import ashiqur.goriberfitbit.rest_api.api_models.WorkoutSessionData;
 import ashiqur.goriberfitbit.rest_api.service.ApiInterface;
+import ashiqur.goriberfitbit.utils.ImageProcessingUtil;
 import ashiqur.goriberfitbit.utils.UiUtil;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -41,15 +40,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-/**
- * This class extends Activity to handle a picture preview, process the preview
- * for a red values and determine a heart beat.
- * 
- * @author Justin Wetherell <phishman3579@gmail.com>
- */
-public class HeartRateMonitor extends Activity {
+public class HeartRateActivity extends Activity {
 
-    private static final String TAG = "HeartRateMonitor";
+    private static final String TAG = "HeartRateActivity";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
 
     private static SurfaceView preview = null;
@@ -80,15 +73,16 @@ public class HeartRateMonitor extends Activity {
     private static double beats = 0;
     private static long startTime = 0;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.heartrate_activity);
 
-
+        if(shouldAskPermissions())
+        {
+            UiUtil.showAlertDialog(HeartRateActivity.this, "", "", "OK :( ", R.color.colorPrimaryDark ,R.color.colorAccent);
+            return;
+        }
         preview = (SurfaceView) findViewById(R.id.preview);
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
@@ -157,7 +151,7 @@ public class HeartRateMonitor extends Activity {
             int width = size.width;
             int height = size.height;
 
-            int imgAvg = ImageProcessingUtils.decodeYUV420SPtoRedAvg(data.clone(), height, width);
+            int imgAvg = ImageProcessingUtil.decodeYUV420SPtoRedAvg(data.clone(), height, width);
             // Log.i(TAG, "imgAvg="+imgAvg);
             if (imgAvg == 0 || imgAvg == 255) {
                 processing.set(false);
@@ -249,9 +243,6 @@ public class HeartRateMonitor extends Activity {
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             Camera.Parameters parameters = camera.getParameters();
@@ -265,9 +256,6 @@ public class HeartRateMonitor extends Activity {
             camera.startPreview();
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
             // Ignore
@@ -328,7 +316,7 @@ public class HeartRateMonitor extends Activity {
                                     if (response.isSuccessful()) {
                                         ApiClient.jwtAccessToken = response.body().access;
                                     } else
-                                        UiUtil.showAlertDialog(HeartRateMonitor.this, "Cannot Connect",
+                                        UiUtil.showAlertDialog(HeartRateActivity.this, "Cannot Connect",
                                                 "Access Token not found !", "DISMISS", R.color.colorPrimary, R.color.colorAccent);
                                 }
 
@@ -341,14 +329,14 @@ public class HeartRateMonitor extends Activity {
                         e.printStackTrace();
                     }
                 } else {
-                    UiUtil.showAlertDialog(HeartRateMonitor.this, "Cannot Connect",
+                    UiUtil.showAlertDialog(HeartRateActivity.this, "Cannot Connect",
                             response.body().detail, "DISMISS", R.color.colorPrimary, R.color.colorAccent);
                 }
             }
 
             @Override
             public void onFailure(Call<CustomResponse> call, Throwable t) {
-                UiUtil.showErrorDialog(HeartRateMonitor.this, "Network Failure !", t.toString());
+                UiUtil.showErrorDialog(HeartRateActivity.this, "Network Failure !", t.toString());
             }
         });
     }
